@@ -17,7 +17,6 @@ if "enabled_settings" not in st.session_state:
     st.session_state.enabled_settings = {}
 
 # --- API 密钥设置 ---
-# --- API 密钥设置 ---
 API_KEYS = {
     "主密钥": "AIzaSyAV6awcQC4NUQaX241EM72zxsGdwSEFMm0",  # 替换成你的主 API 密钥
     "备用1号": "AIzaSyAWfFf6zqy1DizINOwPfxPD8EF2ACdwCaQ",  # 替换成你的备用 API 密钥
@@ -34,11 +33,15 @@ API_KEYS = {
 }
 
 
-# --- 配置 API 密钥 ---
-if "selected_api_key" not in st.session_state:
-    st.session_state.selected_api_key = list(API_KEYS.keys())[0]  # Default to the first key
-genai.configure(api_key=API_KEYS[st.session_state.selected_api_key])
 
+selected_key = st.sidebar.selectbox("选择 API 密钥", list(api_keys.keys()), index=0) # 默认选择主密钥
+api_key = api_keys[selected_key]
+
+if not api_key:
+    st.error("请设置有效的API密钥。")
+    st.stop()
+
+genai.configure(api_key=api_key)
 
 # --- 模型设置 ---
 generation_config = {
