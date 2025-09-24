@@ -1,0 +1,12 @@
+langchain
+google-generativeai
+gradio
+requests
+aiohttp
+promise
+asyncio
+python-dotenv
+streamlit==1.49.1
+tenacity 
+pillow            
+
